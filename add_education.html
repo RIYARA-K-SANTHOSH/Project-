@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Education Details</title>
+    <link rel="stylesheet" href="{% static 'css/education.css' %}">
+    <script src="{% static 'js/education.js' %}" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Education Details</h1>
+        <form method="post">
+            {% csrf_token %}
+            <form method="post" action="{% url 'add_education' %}">
+            <label for="institution_name">Institution Name:</label>
+            <input type="text" id="institution_name" name="institution_name" required><br>
+
+            <label for="institution_type">Institution Type:</label>
+            <select id="institution_type" name="institution_type" required>
+                <option value="School">School</option>
+                <option value="College">College</option>
+                <option value="University">University</option>
+                <option value="Other">Other</option>
+            </select><br>
+
+            <label for="degree">Degree:</label>
+            <input type="text" id="degree" name="degree"><br>
+
+            <label for="field_of_study">Field of Study:</label>
+            <input type="text" id="field_of_study" name="field_of_study"><br>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" id="start_date" name="start_date" required><br>
+
+            <label for="end_date">End Date:</label>
+            <input type="date" id="end_date" name="end_date"><br>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea><br>
+
+            <label for="school_details" class="conditional-field school">School Details:</label>
+            <textarea id="school_details" name="school_details" class="conditional-field school"></textarea><br>
+
+            <label for="college_details" class="conditional-field college">College Details:</label>
+            <textarea id="college_details" name="college_details" class="conditional-field college"></textarea><br>
+
+            <label for="university_details" class="conditional-field university">University Details:</label>
+            <textarea id="university_details" name="university_details" class="conditional-field university"></textarea><br>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+</body>
+</html>

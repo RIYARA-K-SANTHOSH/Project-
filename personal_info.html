@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Personal Info</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personal_info.css' %}">
+</head>
+<body>
+    <h1>Create Personal Information</h1>
+    <form method="post" enctype="multipart/form-data" action="{% url 'create_personal_info' %}">
+        {% csrf_token %}
+        
+        <label for="profile_picture">Profile Picture:</label>
+        <input type="file" name="profile_picture" id="profile_picture"><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" name="address" id="address"><br>
+        
+        <label for="marital_status">Marital Status:</label>
+        <input type="text" name="marital_status" id="marital_status"><br>
+        
+        <label for="height">Height:</label>
+        <input type="text" name="height" id="height"><br>
+        
+        <label for="weight">Weight:</label>
+        <input type="text" name="weight" id="weight"><br>
+        
+        <label for="blood_group">Blood Group:</label>
+        <input type="text" name="blood_group" id="blood_group"><br>
+        
+        <label for="hobbies">Hobbies:</label>
+        <input type="text" name="hobbies" id="hobbies"><br>
+        
+        <label for="occupation">Occupation:</label>
+        <input type="text" name="occupation" id="occupation"><br>
+        
+        <label for="annual_income">Annual Income:</label>
+        <input type="text" name="annual_income" id="annual_income"><br>
+        
+        <label for="about_me">About Me:</label>
+        <textarea name="about_me" id="about_me"></textarea><br>
+        
+        <label for="location">Location:</label>
+        <input type="text" name="location" id="location"><br>
+        
+        <label for="religion">Religion:</label>
+        <input type="text" name="religion" id="religion"><br>
+        
+        <label for="mother_tongue">Mother Tongue:</label>
+        <input type="text" name="mother_tongue" id="mother_tongue"><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

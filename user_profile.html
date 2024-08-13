@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <header class="site-header">
+        <nav>
+            <ul>
+                <li><a href="{% url 'profile' %}">Home</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="profile-container">
+        <div class="profile-picture">
+            {% if user.profile_picture %}
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+            {% else %}
+            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture">
+            {% endif %}
+        </div>
+        <div class="profile-info">
+            <h1>Profile</h1>
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+            <p><strong>Gender:</strong> {{ user.gender }}</p>
+            <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
+            <!-- Edit Button -->
+        </div>
+    </div>
+</body>
+</html>
