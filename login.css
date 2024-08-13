@@ -1,0 +1,171 @@
+/* General styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero image section */
+.hero-image {
+    position: relative;
+    width: 100%;
+    height: 80vh; /* Adjust the height to control the hero image size */
+    background: url("{% static 'images/img3.jpg' %}") no-repeat center center/cover;
+    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+}
+
+.hero-image header {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Space between logo and nav links */
+    align-items: center;
+    padding: 20px; /* Increased padding for a better look */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Ensure header is above the background image */
+}
+
+.hero-image header .logo {
+    flex: 1;
+}
+
+.hero-image header .logo h1 {
+    font-size: 24px; /* Font size for the logo */
+    color: #fff;
+    margin: 0;
+}
+
+.hero-image header .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px; /* Space between navigation links */
+    margin: 0;
+    padding: 0;
+}
+
+.hero-image header .nav-links li {
+    margin: 0;
+}
+
+.hero-image header .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px; /* Font size for navigation links */
+}
+
+.hero-image .form-section {
+    position: absolute;
+    top: 60%; /* Moved from 50% to 60% for better placement */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 800px; /* Adjusted width for a narrower form */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px; /* Added padding on the sides */
+    z-index: 5; /* Ensure form is above the background image */
+}
+
+.hero-image .form-section .form {
+    display: flex; /* Flexbox to arrange image and form fields */
+    background: rgba(255, 255, 255, 0.9); /* Slightly opaque form background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px; /* Increased max-width for longer form */
+    box-sizing: border-box;
+}
+
+.hero-image .form-section .form .form-image {
+    flex: 1;
+    margin-right: 20px; /* Space between image and form fields */
+}
+
+.hero-image .form-section .form .form-image img {
+    width: 100%; /* Full width of its container */
+    max-width: 300px; /* Adjusted maximum width for the image */
+    height: auto;
+    border-radius: 8px; /* Round corners for the image */
+}
+
+.hero-image .form-section .form .form-content {
+    flex: 2;
+    position: relative; /* Allows positioning of the forgot password link */
+    padding-top: 60px; /* Increased padding to move form content further down */
+}
+
+/* Form row styling */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the spacing between elements */
+    margin-bottom: 35px; /* Increased space below each row to push down */
+}
+
+.form-row input,
+.form-row select {
+    flex: 1 1 calc(50% - 10px); /* Adjust width and spacing */
+    box-sizing: border-box; /* Ensure padding and border are included in width */
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px; /* Space below each input field */
+}
+
+.form-row input:last-child,
+.form-row select:last-child {
+    margin-right: 0;
+}
+
+button {
+    background-color: pink;
+    border: none;
+    color: white;
+    padding: 15px 20px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 40px 0 10px; /* Increased margin to push the button further down */
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #ff69b4; /* Slightly darker pink */
+}
+
+.forgot-password-link {
+    text-align: right;
+    margin-top: 40px; /* Increased margin to push the link further down */
+}
+
+.forgot-password-link a {
+    color: #007bff; /* Light blue color */
+    text-decoration: none; /* Remove underline */
+}
+
+.forgot-password-link a:hover {
+    text-decoration: none; /* Ensure no underline on hover */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #222;
+    color: #fff;
+    margin-top: 40px; /* Add space above the footer */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+    .form-row input,
+    .form-row select {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}

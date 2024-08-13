@@ -1,0 +1,141 @@
+/* Basic resets and font settings */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    padding-top: 60px; /* Padding for fixed header */
+}
+
+/* Header styling */
+.site-header {
+    background-color: #333; /* Dark background for header */
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Ensure header is above other content */
+}
+
+.site-header nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.site-header nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.site-header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.site-header nav ul li a:hover {
+    text-decoration: none; /* Remove underline on hover */
+    color: #007bff; /* Change color on hover to blue (or any other color you prefer) */
+}
+
+/* Container for profile content */
+.profile-container {
+    max-width: 800px;
+    margin: 60px auto; /* Increased top margin to move the container down */
+    padding: 20px;
+    background-color: #f9f9f9; /* Light color for container */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile picture styling */
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #ddd;
+    overflow: hidden;
+    margin: 0 auto 20px; /* Centered and spaced from the details */
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Profile details container */
+.profile-info {
+    text-align: left; /* Align text to the left */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff; /* Slightly different color for details */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto; /* Center the container horizontally */
+}
+
+/* Center the profile heading */
+.profile-info h1 {
+    text-align: center; /* Center the heading */
+    margin-top: 0; /* Remove default margin */
+}
+
+/* Profile details styling */
+.profile-info p {
+    margin: 10px 0;
+    font-size: 18px; /* Increased font size */
+}
+
+/* Specific styling for certain headings */
+.profile-info p strong {
+    display: inline-block;
+    font-size: 18px; /* Adjust as needed */
+    color: #333; /* Set color to black */
+    font-weight: bold; /* Make text bold */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .profile-info {
+        width: 100%;
+        max-width: none;
+    }
+
+    .profile-info p,
+    .profile-info strong {
+        font-size: 16px; /* Adjust font size for smaller screens if needed */
+    }
+}
+
+/* Edit button styling */
+.edit-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff; /* Bootstrap primary color */
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.edit-button:hover {
+    background-color: #0056b3; /* Darker shade of blue for hover effect */
+    text-decoration: none;
+}
+
+/* Center the edit button */
+.profile-info .edit-button {
+    display: block;
+    width: 200px; /* Adjust width as needed */
+    margin: 20px auto 0; /* Center horizontally and add margin on top */
+    text-align: center;
+}
