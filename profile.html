@@ -4,77 +4,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrimony Website</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Create Your Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
 <body>
-    <div class="main-container">
-        <div class="image-container">
-            <div class="header-overlay">
-                <div class="site-name"></div> <!-- Site Name -->
-                <nav>
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#stories" class="nav-link">Our Stories</a>
-                    <a href="{% url 'user_profile' %}" class="nav-link">My Profile</a>
-                    <a href="{% url 'logout' %}" class="nav-link">Logout</a>
-                </nav>
+    <div class="container">
+        <!-- Create Your Profile Title and Progress Bar Container -->
+        <div class="header-container">
+            <div class="profile-header">
+                <h1>Create Your Profile</h1>
             </div>
-     
+            <div class="progress-bar">
+                <div class="step active">1</div>
+                <div class="step">2</div>
+                <div class="step">3</div>
+                <div class="step">4</div>
+                <div class="step">5</div>
+            </div>
+        </div>
 
-        </div>
-        <div class="content-container">
-            <h1>Find someone you love</h1>
-            <p>Find your perfect match and start your new journey together.</p>
-        </div>
-        <div class="cards-container">
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Signup">
-                <h2>Signup</h2>
-                <p>Join us today and start your journey.</p>
-                <a href="#signup" class="btn">Sign Up</a>
-            </div>
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Connect">
-                <h2>Connect</h2>
-                <p>Connect with potential matches and start meaningful conversations.</p>
-                <a href="#connect" class="btn">Connect</a>
-            </div>
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Interact">
-                <h2>Interact</h2>
-                <p>Interact with your matches and explore new possibilities.</p>
-                <a href="#interact" class="btn">Interact</a>
-            </div>
-        </div>
-        <div id="about" class="about-container">
-            <h2>About Us</h2>
-            <p>
-                Welcome to our Matrimony website, where we are committed to helping you find your perfect life partner.
-                Our platform is designed to provide a seamless and enjoyable experience for individuals seeking meaningful relationships.
-                Our mission is to bring people together in a way that fosters genuine connections and long-lasting relationships. We understand that finding the right partner is a deeply personal journey, and we are here to support you every step of the way.
-                Founded by a team of passionate individuals, our website emerged from the desire to create a more meaningful and personalized matchmaking experience. With years of experience in the industry, we have built a platform that combines technology and empathy to assist you in finding your ideal partner.
-                Whether you are new to online matrimony or looking for a fresh start, we invite you to join our community. Explore the diverse profiles of individuals who share your values and aspirations, and take the first step towards building a fulfilling relationship.
-                Thank you for choosing us as your partner in this important journey. We look forward to helping you find the love and companionship you deserve.
-            </p>
-        </div>
-        <div id="stories" class="stories-container">
-            <h2>Our Stories</h2>
-            <div class="stories-cards">
-                <div class="story-card">
-                    <img src="{% static 'images/image6.jpg' %}" alt="Client 1">
-                    <h3>Emma & John</h3>
-                    <p>"I am incredibly grateful for this platform. It helped me find my soulmate, John. Our journey together has been nothing short of magical. Thank you for bringing us together!"</p>
+        <!-- Form Container Section -->
+        <div class="form-container">
+            <form method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                <!-- Hidden field for reg_id -->
+                <input type="hidden" name="reg_id" value="{{ user.reg_id }}">
+
+                <div class="form-section">
+                    <h2>Basic Information</h2>
+
+                    <!-- Existing fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="address">Address *</label>
+                            <input type="text" id="address" name="address" required>
+                        </div>
+                            
+                        <div class="form-group">
+                            <label for="height">Height *</label>
+                            <select id="height" name="height" required>
+                                <option value="">Choose</option>
+                                <option value="150cm">150 cm</option>
+                                <option value="155cm">155 cm</option>
+                                <option value="160cm">160 cm</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Weight (KG)</label>
+                            <select id="weight" name="weight">
+                                <option value="">Choose</option>
+                                <option value="50kg">50 kg</option>
+                                <option value="55kg">55 kg</option>
+                                <option value="60kg">60 kg</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="marital-status">Marital Status *</label>
+                            <select id="marital-status" name="marital_status" required>
+                                <option value="">Please Select</option>
+                                <option value="single">Single</option>
+                                <option value="divorced">Divorced</option>
+                                <option value="widowed">Widowed</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mother-tongue">Mother Tongue *</label>
+                            <select id="mother-tongue" name="mother_tongue" required>
+                                <option value="">Choose</option>
+                                <option value="malayalam">Malayalam</option>
+                                <option value="tamil">Tamil</option>
+                                <option value="hindi">Hindi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="religion">Religion *</label>
+                            <select id="religion" name="religion" required>
+                                <option value="">Choose</option>
+                                <option value="christian">Christian</option>
+                                <option value="hindu">Hindu</option>
+                                <option value="muslim">Muslim</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="caste">Caste / Denomination *</label>
+                            <select id="caste" name="caste" required>
+                                <option value="">Choose</option>
+                                <option value="catholic">Catholic</option>
+                                <option value="orthodox">Orthodox</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="physical-status">Physical Status</label>
+                            <select id="physical-status" name="physical_status">
+                                <option value="">Choose</option>
+                                <option value="normal">Normal</option>
+                                <option value="differently-abled">Differently-abled</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="about">About Me *</label>
+                            <textarea id="about" name="about" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="spoken-language">Spoken Language(s)</label>
+                            <input type="text" id="spoken-language" name="spoken_language" value="Malayalam">
+                        </div>
+                    </div>
+
+                    <!-- New fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hobbies">Hobbies</label>
+                            <textarea id="hobbies" name="hobbies"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="occupation">Occupation</label>
+                            <input type="text" id="occupation" name="occupation">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="annual_income">Annual Income</label>
+                            <input type="text" id="annual_income" name="annual_income">
+                        </div>
+                        <div class="form-group">
+                            <label for="about_me">More About Me</label>
+                            <textarea id="about_me" name="about_me"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="form-row">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
                 </div>
-                <div class="story-card">
-                    <img src="{% static 'images/image3.jpg' %}" alt="Client 2">
-                    <h3>Alice & Robert</h3>
-                    <p>"Our experience with this matrimony site was exceptional. Alice and I connected instantly, and now we are happily married. We appreciate the thoughtful matchmaking process!"</p>
-                </div>
-                <div class="story-card">
-                    <img src="{% static 'images/image4.jpg' %}" alt="Client 3">
-                    <h3>Linda & Michael</h3>
-                    <p>"This platform gave me the chance to meet Michael, who has become the love of my life. The support and options provided were excellent. We couldn't be happier!"</p>
+            </form>
+
+            <div class="profile-progress">
+                <div class="progress-rectangle">
+                    <div class="progress-circle">
+                        <span>11%</span>
+                    </div>
+                    <p>Your Profile is 11% Complete<br>(step 1 out of 5)</p>
                 </div>
             </div>
         </div>
