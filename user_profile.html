@@ -5,34 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile</title>
-    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <header class="site-header">
-        <nav>
-            <ul>
-                <li><a href="{% url 'profile' %}">Home</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            </ul>
-        </nav>
-    </header>
-    <div class="profile-container">
-        <div class="profile-picture">
-            {% if user.profile_picture %}
-            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
-            {% else %}
-            <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture">
-            {% endif %}
+    <!-- Header -->
+    <header class="header-container">
+        <div class="logo">
+            <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt=""></a>
         </div>
-        <div class="profile-info">
-            <h1>Profile</h1>
-            <p><strong>First Name:</strong> {{ user.first_name }}</p>
-            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
-            <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
-            <p><strong>Gender:</strong> {{ user.gender }}</p>
-            <p><strong>Date of Birth:</strong> {{ user.dob }}</p>
-            <!-- Edit Button -->
+        <!-- Header Links -->
+        <div class="header-links">
+            <a href="{% url 'index' %}" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{% url 'profile' %}" class="nav-link">
+                <i class="fas fa-user"></i> Details
+            </a>
+            <a href="{% url 'logout' %}" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <h1>Profile</h1>
+            </div>
+            <div class="profile-content">
+                <div class="profile-picture">
+                    {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+                    {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture">
+                    {% endif %}
+                </div>
+                <div class="profile-info">
+                    <p><i class="fas fa-user"></i> <strong>First Name:</strong> {{ user.first_name }}</p>
+                    <p><i class="fas fa-user"></i> <strong>Last Name:</strong> {{ user.last_name }}</p>
+                    <p><i class="fas fa-phone"></i> <strong>Phone Number:</strong> {{ user.phone_number }}</p>
+                    <p><i class="fas fa-genderless"></i> <strong>Gender:</strong> {{ user.gender }}</p>
+                    <p><i class="fas fa-calendar-alt"></i> <strong>Date of Birth:</strong> {{ user.dob }}</p>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 YourSiteName. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
