@@ -48,6 +48,9 @@
                     <p><i class="fas fa-phone"></i> <strong>Phone Number:</strong> {{ user.phone_number }}</p>
                     <p><i class="fas fa-genderless"></i> <strong>Gender:</strong> {{ user.gender }}</p>
                     <p><i class="fas fa-calendar-alt"></i> <strong>Date of Birth:</strong> {{ user.dob }}</p>
+                    <a href="{% url 'edit_profile' user.reg_id %}" class="edit-btn">
+                        <i class="fas fa-edit"></i> Edit Profile
+                    </a>
                 </div>
             </div>
         </div>

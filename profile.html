@@ -15,18 +15,17 @@
             <a href="{% url 'index' %}"><img src="{% static 'images/logo.png' %}" alt=""></a>
         </div>
         <!-- Header Links -->
-<div class="header-links">
-    <a href="{% url 'index' %}" class="nav-link">
-        <i class="fas fa-home"></i> Home
-    </a>
-    <a href="{% url 'user_profile' %}" class="nav-link">
-        <i class="fas fa-user"></i> Profile
-    </a>
-    <a href="{% url 'logout' %}" class="nav-link">
-        <i class="fas fa-sign-out-alt"></i> Logout
-    </a>
-</div>
-
+        <div class="header-links">
+            <a href="{% url 'index' %}" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{% url 'user_profile' %}" class="nav-link">
+                <i class="fas fa-user"></i> Profile
+            </a>
+            <a href="{% url 'logout' %}" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
     </header>
 
     <!-- Main Content -->
@@ -60,24 +59,14 @@
                             
                         <div class="form-group">
                             <label for="height">Height *</label>
-                            <select id="height" name="height" required>
-                                <option value="">Choose</option>
-                                <option value="150cm">150 cm</option>
-                                <option value="155cm">155 cm</option>
-                                <option value="160cm">160 cm</option>
-                            </select>
+                            <input type="text" id="height" name="height" required>
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="weight">Weight (KG)</label>
-                            <select id="weight" name="weight">
-                                <option value="">Choose</option>
-                                <option value="50kg">50 kg</option>
-                                <option value="55kg">55 kg</option>
-                                <option value="60kg">60 kg</option>
-                            </select>
+                            <input type="text" id="weight" name="weight">
                         </div>
                         <div class="form-group">
                             <label for="marital-status">Marital Status *</label>
@@ -96,6 +85,7 @@
                             <select id="mother-tongue" name="mother_tongue" required>
                                 <option value="">Choose</option>
                                 <option value="malayalam">Malayalam</option>
+                                <option value="tamil">English</option>
                                 <option value="tamil">Tamil</option>
                                 <option value="hindi">Hindi</option>
                             </select>
@@ -105,8 +95,6 @@
                             <select id="religion" name="religion" required>
                                 <option value="">Choose</option>
                                 <option value="christian">Christian</option>
-                                <option value="hindu">Hindu</option>
-                                <option value="muslim">Muslim</option>
                             </select>
                         </div>
                     </div>
@@ -142,6 +130,22 @@
                     </div>
 
                     <!-- New fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Age</label>
+                            <input type="number" id="age" name="age">
+                        </div>
+                        <div class="form-group">
+                            <label for="complexion">Complexion</label>
+                            <select id="complexion" name="complexion">
+                                <option value="">Choose</option>
+                                <option value="fair">Fair</option>
+                                <option value="wheatish">Wheatish</option>
+                                <option value="dark">Dark</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label for="hobbies">Hobbies</label>
