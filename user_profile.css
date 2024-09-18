@@ -80,12 +80,12 @@
 .profile-content {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Align the content to the start (left) */
+    justify-content: center; /* Align the content to the center */
+    flex-direction: column; /* Stack profile picture and info vertically */
 }
 
 .profile-picture {
-    margin-right: 60px;
-    margin-top: -40px; /* Move the image higher */
+    margin-bottom: 20px; /* Space between picture and info */
 }
 
 .profile-picture img {
@@ -99,7 +99,6 @@
     text-align: left; /* Align text to the left */
 }
 
-/* Add margin-top to increase space between profile header and profile info */
 .profile-info p {
     font-size: 1.2rem; /* Increased font size for profile details */
     margin: 10px 0;
@@ -115,26 +114,27 @@
 
 /* Edit Button */
 .edit-btn {
-    display: inline-block;
-    margin-top: 20px;
+    display: block;
+    margin: 20px auto; /* Center the button */
     padding: 10px 20px;
-    background-color: #cbadd1; /* Button color */
-    color: #fff;
+    background-color: #ffb6c1; 
+    color: #000000;
     text-decoration: none;
     border-radius: 5px;
     font-size: 1.1rem; /* Font size for the button */
     transition: background-color 0.3s;
+    text-align: center; /* Center text inside the button */
 }
 
 .edit-btn:hover {
-    background-color: #a78f9e; /* Darker shade for hover effect */
+    background-color:#e5a3ae; /* Darker blue shade for hover effect */
 }
 
 /* Footer Container */
 .footer-container {
     background-color: #cbadd1; /* Light gray background for the footer */
     padding: 20px;
-    margin-top: 240px; /* Increased margin-top to move footer further down */
+    margin-top: 40px; /* Increased margin-top to move footer further down */
     text-align: center; /* Center-align text */
 }
 

@@ -1,0 +1,209 @@
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #cbadd1;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.header-content {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.header-links {
+    display: flex;
+    gap: 20px;
+}
+
+.header-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    font-style: italic;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Cursive', cursive;
+}
+
+.header-links a:hover {
+    color: #000000;
+}
+
+.header-links i {
+    font-size: 18px;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar form {
+    display: flex;
+}
+
+.search-bar input[type="text"] {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 14px;
+    width: 180px; /* Adjust the width as needed */
+}
+
+.search-bar .search-button {
+    padding: 4px;
+    border: 1px solid #ddd;
+    border-radius: 0 4px 4px 0;
+    background-color: #ffffff; /* Light background color */
+    cursor: pointer;
+    display: flex; /* Ensure it’s a flex container to align the icon */
+    align-items: center; /* Center the icon vertically */
+    font-size: 14px;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.search-bar .search-button i {
+    font-size: 18px; /* Size of the search icon */
+    color: #333; /* Color of the search icon */
+}
+
+/* Button hover effect */
+.search-bar .search-button:hover {
+    background-color: #e0e0e0; /* Lighter color on hover */
+}
+
+.search-bar .search-button:hover i {
+    color: #333; /* Ensure the icon color remains the same on hover */
+}
+
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+/* Main Container Styling */
+.main-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* Profile Section Styling */
+.profile-section {
+    flex: 1;
+    max-width: 1200px;
+}
+
+/* Profile List Styling */
+.profile-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Profile Card Styling */
+.profile-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 300px;
+}
+
+/* Profile Image */
+.profile-card img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Profile Name */
+.profile-card h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Profile Details */
+.profile-card p {
+    margin: 5px 0;
+    color: #777;
+}
+
+/* Button Container */
+.button-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Remove the background of the button wrapping the link */
+button.no-bg {
+    background-color: transparent; /* Remove the green background */
+    border: none; /* Remove any borders */
+    padding: 0; /* Remove any padding */
+}
+
+button.no-bg:hover {
+    background-color: transparent; /* No hover background for the button */
+}
+
+/* Style the link */
+.view-profile-link {
+    background-color: #007bff; /* Blue background */
+    color: #fff; /* White text */
+    padding: 10px 15px; /* Add some padding for spacing */
+    text-decoration: none; /* Remove underline from link */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px;
+    display: block; /* Ensure it takes full width of its container */
+    text-align: center; /* Center the text */
+}
+
+.view-profile-link:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+    color: #fff; /* Keep text white on hover */
+}
+
+
+
+/* Send Request Button */
+button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+/* Footer Styles */
+.footer-container {
+    background-color: #cbadd1;
+    padding: 20px;
+    text-align: center;
+    color: #fff;
+    margin-top: 30px;
+}
