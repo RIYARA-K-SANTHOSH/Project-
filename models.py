@@ -63,6 +63,8 @@ class Profile(models.Model):
     occupation = models.CharField(max_length=255, blank=True, null=True)
     annual_income = models.CharField(max_length=50, blank=True, null=True)
     more_about_me = models.TextField(blank=True, null=True)
+    age = models.IntegerField(blank=True, null=True)
+    complexion = models.CharField(max_length=50, blank=True, null=True)
     
     def __str__(self):
         return f"Profile for {self.reg_id.email}"
@@ -114,6 +116,14 @@ class Family(models.Model):
     def __str__(self):
         return f"Family details of {self.reg_id.email}"
 
+class ImageUpload(models.Model):
+    reg_id = models.ForeignKey('Register', on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='uploads/images/')
+    compressed_image = models.ImageField(upload_to='uploads/compressed_images/', null=True, blank=True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Image {self.id} uploaded by User with reg_id {self.reg_id}"
 
         
 from django.db import models
@@ -128,25 +138,6 @@ class Login(models.Model):
     def __str__(self):
         return f"Login record for {self.email}"
 
-    
-    
-class MembershipPlan(models.Model):
-    PLAN_CHOICES = [
-        ('Gold', 'Gold'),
-        ('Diamond', 'Diamond'),
-        ('Platinum Plus', 'Platinum Plus'),
-        ('Gold Plus', 'Gold Plus'),
-        ('Diamond Plus', 'Diamond Plus'),
-    ]
-
-    plan_id = models.AutoField(primary_key=True)
-    plan_name = models.CharField(max_length=100, choices=PLAN_CHOICES, unique=True)
-    plan_details = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    duration_months = models.IntegerField()
-
-    def __str__(self):
-        return self.plan_name
     
 from django.db import models
 from django.contrib.auth.models import User
