@@ -83,8 +83,8 @@ body {
     text-decoration: underline;
 }
 
-/* Form Container Styling */
-.container {
+/* Form Section Styling */
+.form-section {
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
@@ -93,39 +93,52 @@ body {
     border-radius: 8px;
 }
 
-.details-all-container h1 {
+.form-section h2 {
     text-align: center;
     font-size: 28px;
     color: #333;
     margin-bottom: 40px;
 }
 
-/* Form field styling */
-.details-row {
+.form-section-group {
+    margin-bottom: 30px;
+}
+
+.form-section-group h3 {
+    font-size: 20px;
+    color: #cbadd1;
+    margin-bottom: 20px;
+}
+
+/* Form Row Styling */
+.form-row {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.detail-field {
+.form-group {
     flex: 1;
     margin-right: 20px;
 }
 
-.detail-field:last-child {
+.form-group.half-width {
+    flex: 0.48; /* Adjust width for half-sized inputs */
+}
+
+.form-group:last-child {
     margin-right: 0;
 }
 
-.detail-field label {
+/* Form Label and Input Styling */
+.form-group label {
     display: block;
     font-size: 14px;
     margin-bottom: 8px;
     color: #333;
 }
 
-.detail-field input,
-.detail-field select,
-.detail-field textarea {
+.form-group input, .form-group textarea, .form-group select {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -135,16 +148,14 @@ body {
     box-sizing: border-box;
 }
 
-.detail-field input:focus,
-.detail-field select:focus,
-.detail-field textarea:focus {
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
     border-color: #cbadd1;
     outline: none;
     background-color: #fff;
 }
 
-/* Button styling */
-.edit-button {
+/* Button Styling */
+.submit-button {
     display: inline-block;
     padding: 12px 24px;
     background-color: #cbadd1;
@@ -155,25 +166,25 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease;
     text-align: center;
+    margin: 20px 0;
+    width: 100%;
 }
 
-.edit-button:hover {
+.submit-button:hover {
     background-color: #a383b8;
 }
 
-/* Responsive form design */
+/* Responsive Design */
 @media (max-width: 768px) {
-    .details-row {
+    .form-row {
         flex-direction: column;
     }
 
-    .detail-field {
+    .form-group {
         margin-right: 0;
-        margin-bottom: 20px;
     }
 
-    .edit-button {
+    .submit-button {
         width: 100%;
-        padding: 16px;
     }
 }
