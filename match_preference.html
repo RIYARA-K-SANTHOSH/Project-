@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> <!-- Cursive Font -->
+    <link rel="stylesheet" href="{% static 'css/profile1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Partner Preferences</title>
+    <style>
+        /* Body font and background */
+        body {
+            font-family: 'Cursive', cursive;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #ff7c9e;
+            padding: 15px;
+            color: white;
+            text-align: center;
+        }
+
+        .header-links {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .header-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        /* Form container */
+        form {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .btn-primary {
+            background-color: #ff7c9e;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: #e66d84;
+        }
+
+        /* Current preferences section */
+        .current-preferences {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff5f8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .current-preferences h2 {
+            font-size: 24px;
+            color: #ff7c9e;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .current-preferences p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        .current-preferences strong {
+            font-weight: bold;
+            color: #ff7c9e;
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="logo">
+            
+        </div>
+        <div class="header-links">
+            <a href="{% url 'index' %}" class="nav-link">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="{% url 'logout' %}" class="nav-link">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </a>
+        </div>
+    </header>
+
+    <h1 style="text-align: center; color: #ff7c9e; font-size: 36px;">Partner Preferences</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="age_range_min">Age Range Min</label>
+            <input type="number" name="age_range_min" id="age_range_min" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="age_range_max">Age Range Max</label>
+            <input type="number" name="age_range_max" id="age_range_max" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="height_range_min">Height Range Min</label>
+            <input type="number" name="height_range_min" id="height_range_min" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="height_range_max">Height Range Max</label>
+            <input type="number" name="height_range_max" id="height_range_max" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="marital-status">Marital Status Preference</label>
+            <select id="marital-status" name="marital_status_preference" class="form-control" required>
+                <option value="">Please Select</option>
+                <option value="single">Single</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="income_range_min">Income Range Min</label>
+            <input type="number" name="income_range_min" id="income_range_min" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="income_range_max">Income Range Max</label>
+            <input type="number" name="income_range_max" id="income_range_max" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="occupation_preference">Occupation Preference</label>
+            <input type="text" name="occupation_preference" id="occupation_preference" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="education_preference">Education Preference</label>
+            <input type="text" name="education_preference" id="education_preference" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="location_preference">Location Preference</label>
+            <input type="text" name="location_preference" id="location_preference" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Preferences</button>
+    </form>
+
+    <hr>
+
+    <div class="current-preferences">
+        <h2>Current Match Preferences</h2>
+        {% if preferences %}
+            <p><strong>Age Range:</strong> {{ preferences.age_range_min }} - {{ preferences.age_range_max }}</p>
+            <p><strong>Height Range:</strong> {{ preferences.height_range_min }} - {{ preferences.height_range_max }}</p>
+            <p><strong>Marital Status Preference:</strong> {{ preferences.marital_status_preference }}</p>
+            <p><strong>Income Range:</strong> {{ preferences.income_range_min }} - {{ preferences.income_range_max }}</p>
+            <p><strong>Occupation Preference:</strong> {{ preferences.occupation_preference }}</p>
+            <p><strong>Education Preference:</strong> {{ preferences.education_preference }}</p>
+            <p><strong>Location Preference:</strong> {{ preferences.location_preference }}</p>
+        {% else %}
+            <p>No preferences set yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

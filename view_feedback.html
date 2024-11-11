@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Feedback</title>
+    <link rel="stylesheet" href="{% static 'css/adminmain.css' %}">
+    <link rel="stylesheet" href="{% static 'css/view_feedback.css' %}">
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2>Admin Dashboard</h2>
+            <nav>
+                <ul>
+                    <li><a href="{% url 'review_users' %}">Users</a></li>
+                    <li><a href="{% url 'blog_create' %}">Blogs</a></li>
+                    <li><a href="{% url 'package_create' %}">Package</a></li>
+                    <li><a href="{% url 'view_feedback' %}">User Feedback</a></li>
+                    <li><a href="{% url 'create_notification' %}">Notification</a></li>
+                    <li><a href="{% url 'logout' %}" class="logout-link">Logout</a></li>
+                </ul>
+            </nav>
+        </aside>
+    <div class="feedback-container">
+        <h1>User Feedback</h1>
+
+        {% if feedback_list %}
+            <div class="feedback-list">
+                {% for feedback in feedback_list %}
+                    <div class="feedback-item">
+                        <p><strong>Feedback:</strong> {{ feedback.feedback_text }}</p>
+                        <p><strong>Submitted on:</strong> {{ feedback.created_at }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No feedback available.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

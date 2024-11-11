@@ -14,32 +14,58 @@
         <div class="logo">
             <!-- Logo here -->
         </div>
-        <!-- Header Content -->
-        <div class="header-content">
-            <div class="header-links">
-                <a href="{% url 'index' %}" class="nav-link">
-                    <i class="fas fa-home"></i> Home
-                </a>
-                <a href="{% url 'view_all_details' personal_id=current_user.profile.personal_id %}" class="nav-link">
-                    <i class="fas fa-user"></i> My Profile
-                </a>
-                <a href="{% url 'logout' %}" class="nav-link">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
-            </div>
-            <div class="search-bar">
-                <form action="" method="get">
-                    <input type="text" name="query" placeholder="Search...">
-                    <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
-            
+        <div class="header-links">
+            <a href="{% url 'index' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
+            <a href="{% url 'view_all_details' personal_id=current_user.reg_id %}" class="nav-link"><i class="fas fa-user"></i> My Profile</a>
+            <a href="{% url 'package' %}" class="nav-link"><i class="fas fa-gift"></i> Packages</a>
+            <a href="{% url 'match_preference' reg_id=current_user_reg_id %}" class="nav-link">
+                <i class="fas fa-cogs"></i> Set Match Preferences
+            </a>            
+            <a href="{% url 'view_received_requests' %}" class="nav-link"><i class="fas fa-user-friends"></i> Received Requests</a>
+            <a href="{% url 'logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+        <div class="search-bar">
+            <form action="{% url 'search_profiles' %}" method="get">
+                <input type="text" name="query" class="search-input" placeholder="Search by name..." value="{{ search_query|default:'' }}">
+                <button type="submit" class="search-button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="main-container">
-        <section class="profile-section">
+        <!-- Profile Section on Left Side -->
+        <aside class="profile-content">
+            <div class="profile-picture">
+                {% if current_user.profile_picture %}
+                    <img src="{{ current_user.profile_picture.url }}" alt="Profile Picture">
+                {% else %}
+                    <img src="{% static 'images/default-profile.png' %}" alt="Default Profile Picture">
+                {% endif %}
+            </div>
+            <div class="profile-info">
+                <p><i class="fas fa-user"></i> <strong>First Name:</strong> {{ current_user.first_name }}</p>
+                <p><i class="fas fa-user"></i> <strong>Last Name:</strong> {{ current_user.last_name }}</p>
+                <p><i class="fas fa-phone"></i> <strong>Phone Number:</strong> {{ current_user.phone_number }}</p>
+                <p><i class="fas fa-genderless"></i> <strong>Gender:</strong> {{ current_user.gender }}</p>
+                <p><i class="fas fa-calendar-alt"></i> <strong>Date of Birth:</strong> {{ current_user.dob }}</p>
+            </div>
+            <div class="sidebar-links">
+                <a href="{% url 'view_sent_requests' %}"><i class="fas fa-paper-plane"></i> View Sent Requests</a>
+                <a href=" " class="nav-link"><i class="fas fa-envelope"></i> Messages</a>
+                <a href="{% url 'view_notifications' %}" class="nav-link"><i class="fas fa-bell"></i> Notifications</a>
+                <a href="{% url 'feedback' %}" class="nav-link"><i class="fas fa-comment-dots"></i> Feedback</a>
+                <a href="{% url 'blog_list' %}" class="nav-link"><i class="fas fa-blog"></i> Blogs</a>
+            </div>
+        </aside>
+
+        <!-- Profile List on Right Side -->
+        <section class="profile-list-section">
+            {% if search_query %}
+                <h2>Search Results for "{{ search_query }}"</h2>
+            {% endif %}
             <div class="profile-list">
                 {% for user in other_users %}
                     <div class="profile-card">
@@ -54,17 +80,33 @@
                         <p>Date of Birth: {{ user.dob }}</p>
                         <p>Gender: {{ user.gender }}</p>
                         <div class="button-container">
-                            {% if user.profile.personal_id %}
                             <button type="button" class="button no-bg">
                                 <a href="{% url 'view_profile1' user.profile.personal_id %}" class="view-profile-link">View Full Profile</a>
                             </button>
-                            <button type="button" class="button">Send Request</button>
-                            
+
+                            {% if user.request_status == 'Request Received' %}
+                                <button type="button" class="button" style="background-color: #D3D3D3; cursor: not-allowed; color: black;" disabled>Request Received</button>
+
+                            {% elif user.request_status == 'Request Accepted' %}
+                                <button type="button" class="button" style="background-color: #D3D3D3; cursor: not-allowed; color: black;" disabled>Request Accepted</button>
+
+                            {% elif user.request_status == 'Request Sent' %}
+                                <button type="button" class="button" style="background-color: #D3D3D3; cursor: not-allowed; color: black;" disabled>Request Sent</button>
+
+                            {% else %}
+                                <form action="{% url 'send_request' user.profile.personal_id %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" class="button" style="background-color: #4CAF50;">Send Request</button>
+                                </form>
                             {% endif %}
                         </div>
                     </div>
                 {% empty %}
-                    <p>No other users found.</p>
+                    {% if search_query %}
+                        <p>No profiles found matching your search.</p>
+                    {% else %}
+                        <p>No other users found.</p>
+                    {% endif %}
                 {% endfor %}
             </div>
         </section>
@@ -72,7 +114,7 @@
 
     <!-- Footer -->
     <footer class="footer-container">
-        <p>&copy; 2024 Your Company. All Rights Reserved.</p>
+        <p>&copy; 2024 Connect. All Rights Reserved.</p>
     </footer>
 </body>
 </html>
