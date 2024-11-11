@@ -160,5 +160,85 @@ class Notification(models.Model):
 
     def __str__(self):
         return self.title
+    
+from django.db import models
+
+class Package(models.Model):
+    package_id = models.IntegerField(default=0)  # Auto-incrementing ID for each package
+    name = models.CharField(max_length=255)  # Name of the package
+    description = models.TextField()  # Description of the package
+    price = models.DecimalField(max_digits=10, decimal_places=2)  # Price of the package
+    duration_days = models.PositiveIntegerField()  # Duration in days
+
+    def __str__(self):
+        return self.name  # Return the name for better readability in the admin panel
+    
+from django.db import models
+from django.conf import settings
+
+class Payment(models.Model):
+    payment_id = models.AutoField(primary_key=True)  # Auto-incrementing ID for each payment
+    order_id = models.CharField(max_length=255)  # Unique identifier for the order
+    currency = models.CharField(max_length=10)  # Currency code (e.g., USD, EUR)
+    payment_status = models.CharField(max_length=50)  # Status of the payment (e.g., Pending, Completed, Failed)
+    created_at = models.DateTimeField(auto_now_add=True)  # Automatically set the date/time when created
+    reg_id = models.ForeignKey(Register, on_delete=models.CASCADE)  # Foreign key to the Register model
+
+    def __str__(self):
+        return f"Payment {self.payment_id} - {self.payment_status}"
+
+
+
+class FriendRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('accepted', 'Accepted'),
+        ('rejected', 'Rejected'),
+    ]
+    sender = models.ForeignKey(Register, related_name='sent_requests', on_delete=models.CASCADE)
+    recipient = models.ForeignKey(Register, related_name='received_requests', on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+
+
+class PhoneNumber(models.Model):
+    user = models.ForeignKey(Register, on_delete=models.CASCADE, related_name="phone_numbers")
+    number = models.CharField(max_length=15)
+    is_primary = models.BooleanField(default=False)  # Mark if it's the primary number
+
+    def __str__(self):
+        return self.number
+
+
+class Feedback(models.Model):
+    reg_id = models.ForeignKey(Register, on_delete=models.CASCADE, null=False, blank=False)  # reg_id cannot be null or blank
+    feedback_text = models.TextField()  # Feedback content
+    created_at = models.DateTimeField(auto_now_add=True)  # Timestamp for when the feedback is created
+
+    def __str__(self):
+        return f"Feedback from {self.reg_id.fullname}"
+
+
+from django.db import models
+
+class PartnerPreference(models.Model):
+    reg_id = models.OneToOneField(Register, on_delete=models.CASCADE, related_name='partner_preferences')
+    age_range_min = models.IntegerField()
+    age_range_max = models.IntegerField()
+    height_range_min = models.IntegerField()
+    height_range_max = models.IntegerField()
+    marital_status_preference = models.CharField(max_length=100)
+    income_range_min = models.IntegerField()
+    income_range_max = models.IntegerField()
+    occupation_preference = models.CharField(max_length=100)
+    education_preference = models.CharField(max_length=100)
+    location_preference = models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"Partner preferences for {self.reg_id.first_name}"
+
+
 
 
