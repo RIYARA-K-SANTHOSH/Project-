@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Web AR Example</title>
+    <!-- Include A-Frame library -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!-- Include AR.js library -->
+    <script src="https://cdn.jsdelivr.net/gh/jeromeetienne/AR.js/aframe/build/aframe-ar.js"></script>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+      }
+      a-scene {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <!-- Marker for AR tracking -->
+      <a-marker preset="hiro">
+        <!-- 3D model to display when the marker is detected -->
+        <a-entity 
+          gltf-model="url(path_to_your_3d_model.glTF)" 
+          scale="0.5 0.5 0.5" 
+          position="0 0 0"
+          rotation="0 180 0"
+          animation="property: rotation; to: 0 360 0; loop: true; dur: 10000"
+        ></a-entity>
+      </a-marker>
+      
+      <!-- Camera setup -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>

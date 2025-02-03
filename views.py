@@ -17,12 +17,18 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Register, Profile, Login,  ImageUpload,Package,Payment
 import re
+from django.shortcuts import render, redirect
+from .models import Register
+
+from django.shortcuts import render, redirect
+from .models import Register
 
 def index(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        relation = request.POST.get('relation')  # Fetch 'relation' from the form
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
         gender = request.POST.get('gender')
         dob = request.POST.get('dob')
@@ -31,17 +37,14 @@ def index(request):
         profile_picture = request.FILES.get('profile_picture')
 
         if password != confirm_password:
-            messages.error(request, "Passwords do not match.")
-            return redirect('index')
+            return render(request, 'index.html', {'error': 'Passwords do not match!'})
 
-        if Register.objects.filter(email=email).exists():
-            messages.error(request, "Email is already registered.")
-            return redirect('index')
-
-        user = Register(
-            email=email,
+        # Create a new user entry
+        register = Register(
+            relation=relation,
             first_name=first_name,
             last_name=last_name,
+            email=email,
             phone_number=phone_number,
             gender=gender,
             dob=dob,
@@ -49,17 +52,10 @@ def index(request):
             confirm_password=confirm_password,
             profile_picture=profile_picture
         )
-        user.save()
-        Login.objects.create(
-            reg_id=user,
-            email=email,
-            password=password  
-        )
-        messages.success(request, "Registration successful.")
-        return redirect('login')
+        register.save()
+        return redirect('home')  # Redirect to home page after registration
 
     return render(request, 'index.html')
-
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -1951,3 +1947,5 @@ def match_preference_view(request, reg_id):
         'reg_id': reg_id,
         'preferences': preferences
     })
+
+

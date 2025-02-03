@@ -3,8 +3,24 @@ from django.core.mail import send_mail
 from django.utils import timezone
 import uuid
 
+from django.db import models
+from django.core.mail import send_mail
+from django.utils import timezone
+import uuid
+
 class Register(models.Model):
+    RELATION_CHOICES = [
+        ('myself', 'Myself'),
+        ('my_son', 'My Son'),
+        ('my_daughter', 'My Daughter'),
+        ('my_relative', 'My Relative'),
+        ('my_friend', 'My Friend'),
+        ('my_sister', 'My Sister'),
+        ('my_brother', 'My Brother'),
+    ]
+    
     reg_id = models.AutoField(primary_key=True)
+    relation = models.CharField(max_length=20, choices=RELATION_CHOICES, default='myself')  # New field
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -45,6 +61,7 @@ class Register(models.Model):
         subject = "Account Blocked"
         message = f"Dear {self.first_name},\n\nYour account has been blocked by the admin. Please contact support for more information."
         send_mail(subject, message, 'admin@yourdomain.com', [self.email])
+
 
 class Profile(models.Model):
     personal_id = models.AutoField(primary_key=True)
@@ -238,7 +255,5 @@ class PartnerPreference(models.Model):
 
     def __str__(self):
         return f"Partner preferences for {self.reg_id.first_name}"
-
-
 
 

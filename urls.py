@@ -2,7 +2,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='home'),  # Main page
+    path('', views.home, name='home'),
     path('register/', views.index, name='index'),
     path('login/', views.login, name='login'),
     path('profile1/', views.profile_view, name='profile1'),
@@ -51,6 +51,5 @@ urlpatterns = [
     path('feedback/', views.submit_feedback, name='feedback'),
     path('view-feedback/', views.view_feedback, name='view_feedback'),
     path('match-preference/<int:reg_id>/', views.match_preference_view, name='match_preference'),
-   
 
 ]

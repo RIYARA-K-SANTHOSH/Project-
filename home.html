@@ -4,80 +4,1232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matrimony Website</title>
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Matchmaking Service</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+        }
+
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            z-index: 10;
+            margin-top: 10px;
+        }
+
+        header a {
+            color: #000;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: bold;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        header div:first-child {
+            margin-top: -10px;
+        }
+
+        header .login-icon {
+            margin-right: 5px;
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            padding: 4px;
+            text-align: center;
+            line-height: 22px;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 80vh;
+            background-image: url("{% static 'images/image5.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            color: white;
+            z-index: 1;
+            padding-top: 20%;
+        }
+
+        .container {
+            text-align: center;
+            color: #000;
+            font-family: 'Dancing Script', cursive;
+            z-index: 2;
+        }
+
+        .container h1 {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .container p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .search-bar {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            border-radius: 10px;
+            margin: auto;
+            width: fit-content;
+        }
+
+        .search-bar select, .search-bar button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1em;
+            width: 140px;
+        }
+
+        .search-bar button {
+            background-color: #00bcd4;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background-color: #019aa9;
+        }
+
+        .search-bar label {
+            color: #fff;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+            display: block;
+            text-align: left;
+        }
+
+        .find-love-section {
+            padding: 50px;
+            text-align: center;
+            background-color: white;
+            margin-top: -50px;
+        }
+
+        .find-love-section h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            color: purple;
+        }
+
+        .find-love-section p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
+
+        .find-love-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .find-love-item {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            border: 2px solid #00bcd4;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .find-love-item:hover {
+            transform: scale(1.05);
+        }
+
+        .find-love-item .number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: purple;
+            margin-bottom: 15px;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .find-love-item h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .find-love-item p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .find-love-item .btn {
+            background-color: #00bcd4;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .find-love-item .btn:hover {
+            background-color: #019aa9;
+        }
+
+        .find-love-container:before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background-color: #00bcd4;
+            z-index: -1;
+        }
+
+        .find-love-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* New section for Our Stories */
+        .stories-container {
+            padding: 50px;
+            text-align: center;
+            background-color: white;
+        }
+
+        .stories-container h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-family: 'Dancing Script', cursive;
+            color: purple;
+        }
+
+        .stories-cards {
+            display: flex;
+            gap: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .story-card {
+            flex: 0 0 30%;
+            text-align: center;
+            border: 2px solid #00bcd4;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .story-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .story-card:hover {
+            transform: scale(1.05);
+        }
+
+        .story-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .story-card p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        /* Add dots for sliding */
+        .slider-dots {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 5px;
+        }
+
+        .slider-dots .dot {
+            width: 10px;
+            height: 10px;
+            background-color: #00bcd4;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .slider-dots .dot.active {
+            background-color: purple;
+        }
+        .stories-container {
+            padding: 40px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin: 20px auto;
+            max-width: 1200px;
+            width: 95%;
+        }
+        
+        .stories-container h2 {
+            font-size: 2.5em;
+            color:purple;
+            margin-bottom: 20px;
+        }
+        
+        .stories-cards {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 1000px;
+            width: 90%;
+        }
+        
+        .story-card {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 10px;
+            max-width: 250px;
+            text-align: center;
+            flex: 1;
+        }
+        
+        .story-card img {
+            width: 100%;
+            height: auto;
+            max-width: 250px;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 0px;
+        }
+        
+        .story-card h3 {
+            font-size: 1.5em;
+            color: #333;
+            margin: 15px 0;
+        }
+        
+        .story-card p {
+            font-size: 1em;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .story-card {
+                max-width: 80%;
+            }
+        }
+        /* Login Modal */
+.login-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    background: url('{% static "images/image6.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+    width: 400px; /* Increased width */
+    height: 500px; /* Fixed height */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+}
+
+.connect-heading {
+    font-size: 2em;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left; /* Ensure label is aligned left */
+}
+
+.login-form input {
+    width: 90%; /* Inputs now take full width */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.forgot-password {
+    display: block;
+    color: #00bcd4;
+    text-decoration: none;
+    text-align: right;
+    font-weight: bold; /* Make the forgot password bold */
+}
+
+.forgot-password:hover {
+    text-decoration: none; /* Remove hover underline */
+}
+
+.or-line {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.or-line span {
+    font-size: 1.2em;
+    color: white;
+}
+
+.login-form .btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    background-color: #00bcd4; /* Match the color of the forgot password link */
+    color: white;
+}
+
+.login-btn, .otp-btn {
+    background-color: #00bcd4; /* Match the color of the forgot password link */
+    color: white;
+}
+
+.login-btn:hover, .otp-btn:hover {
+    background-color: #019aa9; /* Slightly darker shade on hover */
+}
+
+.signup-link {
+    font-size: 14px;
+    text-align: center;
+}
+
+.signup-link a {
+    color: white;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: none; /* Removed underline on hover */
+}
+/* Signup Modal Styles */
+.signup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+}
+
+.signup-modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.signup-modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.checkbox-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.checkbox-group input {
+    margin-right: 10px;
+}
+
+#continueBtn {
+    background-color: #00bcd4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#continueBtn:hover {
+    background-color: #019aa9;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #019aa9;
+}
+/* Signup Modal Styles */
+.signup-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+}
+
+.signup-modal-content {
+    background: white;
+    border-radius: 15px;
+    width: 40%;
+    max-width: 500px;
+    padding: 20px 30px;
+    position: relative;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.signup-heading {
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Cylinder Group */
+.cylinder-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-items: center;
+}
+
+/* Cylinder Style */
+.cylinder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 50px;
+    padding: 10px 20px;
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+.cylinder input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.cylinder label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    user-select: none;
+    text-align: center;
+}
+
+/* Hover & Selected State */
+.cylinder:hover {
+    border-color: #ff6b81;
+    background: #fdf4f5;
+}
+
+.cylinder input:checked + label {
+    background: linear-gradient(45deg, #ff6b81, #ff8a5c);
+    color: white;
+    border-radius: 50px;
+    padding: 10px 20px;
+    display: inline-block;
+}
+
+/* Button Styling */
+.continue-btn {
+    display: block;
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    background: linear-gradient(45deg, #ff6b81, #ff8a5c);
+    border: none;
+    border-radius: 25px;
+    color: white;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.continue-btn:hover {
+    background: linear-gradient(45deg, #ff8a5c, #ff6b81);
+}
+/* Modal Styles */
+.signup-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.signup-modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+}
+
+.signup-heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Cylinder Design for Inputs */
+.cylinder-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.cylinder {
+    flex: 1 1 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 50px;
+    background-color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cylinder input[type="radio"] {
+    display: none;
+}
+
+.cylinder input[type="radio"]:checked + label {
+    background-color: #ff69b4; /* Pink color */
+    color: white;
+}
+
+.cylinder label {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.cylinder input[type="radio"]:checked + label {
+    background-color: #ff69b4; /* Pink color */
+    color: white;
+}
+
+/* Gender Section */
+#genderField {
+    margin-top: 20px;
+}
+
+#genderField label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#genderField .cylinder {
+    width: 100%;
+}
+
+#genderField select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Continue Button */
+.continue-btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #ff69b4; /* Pink color */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.continue-btn:hover {
+    background-color: #ff1493; /* Darker pink */
+}
+
+
+footer {
+    background-color:rgb(116, 118, 118);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px; /* Ensure the footer stays below content */
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 1em;
+    font-family: Arial, sans-serif;
+}      
+/* Modal Background - Fullscreen Overlay */
+.modal {
+    display: none;  /* Hidden by default */
+    position: fixed;  /* Fixed position (sit on top of the page) */
+    top: 0;
+    left: 0;
+    width: 100%;  /* Full width */
+    height: 100%;  /* Full height */
+    background: rgba(0, 0, 0, 0.5);  /* Semi-transparent background */
+    z-index: 9999;  /* Ensures the modal is in front */
+}
+
+/* Modal Content */
+.register-modal-content {
+    background: white;
+    margin: 10% auto;  /* Center the modal vertically and horizontally */
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;  /* You can adjust the width */
+    max-width: 600px;  /* Max width */
+    position: relative;  /* Position relative for close button */
+    z-index: 10000;  /* Ensure modal content is in front of overlay */
+}
+
+/* Close Button Styling */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: #000;
+    cursor: pointer;
+}
+
+/* Optional: When modal is displayed, show some transition */
+.modal.fade {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* Modal Background */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 100;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+/* Register Form */
+.register-modal-content {
+    background: url('{% static "images/image6.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+    width: 400px; /* Fixed width */
+    max-height: 90%; /* Prevent overflow */
+    overflow-y: auto; /* Scroll if needed */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+}
+
+/* Heading */
+.register-heading {
+    font-size: 2em;
+    color: white;
+    margin-bottom: 20px;
+}
+
+/* Form Groups */
+.register-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+    height:auto;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 3px;
+    text-align: left;
+}
+
+.register-form input,
+.register-form select {
+    width: 90%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 16px;
+    background-color: #00bcd4; /* Same as login button */
+    color: white;
+}
+
+.register-btn:hover {
+    background-color: #019aa9; /* Slightly darker shade on hover */
+}
+
+/* Error Message Styling */
+#error-message {
+    color: red;
+    display: none;
+    text-align: left;
+    margin-top: -10px;
+}
+
+/* Optional - line between buttons */
+.or-line {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.or-line span {
+    font-size: 1.2em;
+    color: white;
+}
+
+/* Signup Link */
+.signup-link {
+    color: white;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Modal Close Button */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Optional - Fade in effect */
+.register-modal.fade {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* Register Form */
+.register-modal-content {
+    background: url('{% static "images/image6.jpg" %}');
+    background-size: cover;
+    background-position: center;
+    padding: 30px;
+    width: 600px; /* Increased width */
+    height: 700px; /* Fixed height */
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: left; /* Align form content to the left */
+    overflow: hidden; /* Prevent scrolling inside the form */
+}
+
+/* Heading */
+.register-heading {
+    font-size: 2.2em; /* Slightly larger heading */
+    color: white;
+    margin-bottom: 30px;
+}
+
+/* Form Groups */
+.register-form .form-group {
+    margin-bottom: 15px; /* Reduced spacing between fields */
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 14px;
+}
+
+.register-form input,
+.register-form select {
+    width: 100%; /* Full width */
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Register Button */
+.register-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-size: 18px; /* Larger button text */
+    background-color: #00bcd4; /* Same as login button */
+    color: white;
+    cursor: pointer;
+}
+
+.register-btn:hover {
+    background-color: #019aa9; /* Slightly darker shade on hover */
+}
+
+/* Error Message Styling */
+#error-message {
+    color: red;
+    display: none;
+    text-align: left;
+    margin-top: -8px;
+    font-size: 13px;
+}
+
+/* Optional - line between buttons */
+.or-line {
+    text-align: center;
+    margin: 25px 0;
+}
+
+.or-line span {
+    font-size: 1.2em;
+    color: white;
+}
+
+/* Signup Link */
+.signup-link {
+    color: white;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #00bcd4;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Modal Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+}
+
+/* Optional - Fade in effect */
+.register-modal.fade {
+    display: block;
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.button-link {
+    display: inline-block;
+    border: none;
+    color: white;
+    padding: 8px 16px; /* Reduced padding */
+    text-align: center;
+    font-size: 14px; /* Reduced font size */
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    text-decoration: none; /* Removes the underline */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+
+ 
+    </style>
 </head>
 <body>
-    <div class="main-container">
-        <div class="image-container">
-            <div class="header-overlay">
-                <div class="site-name"></div> <!-- Site Name -->
-                <nav>
-                    <a href="#home" class="nav-link">Home</a>
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#stories" class="nav-link">Our Stories</a>
-                    <a href="{% url 'index' %}" class="nav-link">Register</a>
-                    <a href="{% url 'login' %}" class="nav-link">Login</a>
-                </nav>
-            </div>
-     
+    <header>
+        <div><a href="#">connect.com</a></div>
+        <div>
+            <!-- Login with profile icon and circle border -->
+            <a href="{% url 'login' %}" id="loginBtn">Login <i class="fas fa-sign-in-alt login-icon"></i></a>
 
+            <a href="#">Help</a>
         </div>
-        <div class="content-container">
-            <h1>Find someone you love</h1>
-            <p>Find your perfect match and start your new journey together.</p>
-        </div>
-        <div class="cards-container">
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Signup">
-                <h2>Signup</h2>
-                <p>Join us today and start your journey.</p>
-                <a href="#signup" class="btn">Sign Up</a>
-            </div>
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Connect">
-                <h2>Connect</h2>
-                <p>Connect with potential matches and start meaningful conversations.</p>
-                <a href="#connect" class="btn">Connect</a>
-            </div>
-            <div class="card">
-                <img src="{% static 'images/img1.png' %}" alt="Interact">
-                <h2>Interact</h2>
-                <p>Interact with your matches and explore new possibilities.</p>
-                <a href="#interact" class="btn">Interact</a>
-            </div>
-        </div>
-        <div id="about" class="about-container">
-            <h2>About Us</h2>
-            <p>
-                Welcome to our Matrimony website, where we are committed to helping you find your perfect life partner.
-                Our platform is designed to provide a seamless and enjoyable experience for individuals seeking meaningful relationships.
-                Our mission is to bring people together in a way that fosters genuine connections and long-lasting relationships. We understand that finding the right partner is a deeply personal journey, and we are here to support you every step of the way.
-                Founded by a team of passionate individuals, our website emerged from the desire to create a more meaningful and personalized matchmaking experience. With years of experience in the industry, we have built a platform that combines technology and empathy to assist you in finding your ideal partner.
-                Whether you are new to online matrimony or looking for a fresh start, we invite you to join our community. Explore the diverse profiles of individuals who share your values and aspirations, and take the first step towards building a fulfilling relationship.
-                Thank you for choosing us as your partner in this important journey. We look forward to helping you find the love and companionship you deserve.
-            </p>
-        </div>
-        <div id="stories" class="stories-container">
-            <h2>Our Stories</h2>
-            <div class="stories-cards">
-                <div class="story-card">
-                    <img src="{% static 'images/image6.jpg' %}" alt="Client 1">
-                    <h3>Emma & John</h3>
-                    <p>"I am incredibly grateful for this platform. It helped me find my soulmate, John. Our journey together has been nothing short of magical. Thank you for bringing us together!"</p>
+    </header>
+
+    
+    <!-- Image Section -->
+    <div class="image-container">
+        <div class="container">
+            <h1>The World's No.1 Matchmaking Service</h1>
+            <p>Search by City, Profession & Community</p>
+            <div class="search-bar">
+                <div>
+                    <label for="looking-for">I'm Looking For</label>
+                    <select id="looking-for">
+                        <option value="man">Man</option>
+                        <option value="woman">Woman</option>
+                    </select>
                 </div>
-                <div class="story-card">
-                    <img src="{% static 'images/image3.jpg' %}" alt="Client 2">
-                    <h3>Alice & Robert</h3>
-                    <p>"Our experience with this matrimony site was exceptional. Alice and I connected instantly, and now we are happily married. We appreciate the thoughtful matchmaking process!"</p>
+                <div>
+                    <label for="age-from">Age From</label>
+                    <select id="age-from">
+                        <option value="" disabled selected>Select</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                        <option value="21">21</option>
+                        <option value="22">22</option>
+                        <option value="23">23</option>
+                        <option value="24">24</option>
+                    </select>
                 </div>
-                <div class="story-card">
-                    <img src="{% static 'images/image4.jpg' %}" alt="Client 3">
-                    <h3>Linda & Michael</h3>
-                    <p>"This platform gave me the chance to meet Michael, who has become the love of my life. The support and options provided were excellent. We couldn't be happier!"</p>
+                <div>
+                    <label for="age-to">Age To</label>
+                    <select id="age-to">
+                        <option value="" disabled selected>Select</option>
+                        <option value="25">25</option>
+                        <option value="26">26</option>
+                        <option value="27">27</option>
+                        <option value="28">28</option>
+                        <option value="29">29</option>
+                        <option value="30">30</option>
+                    </select>
                 </div>
+                <div>
+                    <label for="religion">Caste</label>
+                    <select id="religion">
+                        <option value="" disabled selected>Select</option>
+                        <option value="hindu">Catholic</option>
+                        <option value="christian">Orthodox</option>
+                        <option value="muslim">Malankara</option>
+                        <option value="sikh">Jacobite</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="language">Mother Tongue</label>
+                    <select id="language">
+                        <option value="" disabled selected>Select</option>
+                        <option value="english">English</option>
+                        <option value="hindi">Hindi</option>
+                        <option value="tamil">Tamil</option>
+                        <option value="telugu">Telugu</option>
+                    </select>
+                </div>
+                <button><a href="{% url 'index' %}" class="button-link">Let's Begin</a></button>
+
             </div>
         </div>
     </div>
+
+    <!-- Find Someone You Love Section -->
+    <div class="find-love-section">
+        <h1>Find Someone You Love</h1>
+        <p>Begin your search today and connect with your perfect match.</p>
+        <div class="find-love-container">
+            <div class="find-love-item">
+                <div class="number">1</div>
+                <img src="{% static 'images/img1.png' %}" alt="Image 1">
+                <h2>Matching Profiles</h2>
+                <p>View profiles and find the perfect match.</p>
+                <a href="#" class="btn">Start Searching</a>
+            </div>
+            <div class="find-love-item">
+                <div class="number">2</div>
+                <img src="{% static 'images/img1.png' %}" alt="Image 2">
+                <h2>Connect and Message</h2>
+                <p>Chat with potential matches and share your interests.</p>
+                <a href="#" class="btn">Connect Now</a>
+            </div>
+            <div class="find-love-item">
+                <div class="number">3</div>
+                <img src="{% static 'images/img1.png' %}" alt="Image 3">
+                <h2>Find Your Life Partner</h2>
+                <p>Meet someone special and create lasting memories.</p>
+                <a href="#" class="btn">Find Love</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="stories" class="stories-container">
+        <h2>Our Stories</h2>
+        <div class="stories-cards">
+            <div class="story-card">
+                <img src="{% static 'images/image6.jpg' %}" alt="Client 1">
+                <h3>Emma & John</h3>
+                <p>"I am incredibly grateful for this platform. It helped me find my soulmate, John. Our journey together has been nothing short of magical. Thank you for bringing us together!"</p>
+            </div>
+            <div class="story-card">
+                <img src="{% static 'images/image3.jpg' %}" alt="Client 2">
+                <h3>Alice & Robert</h3>
+                <p>"Our experience with this matrimony site was exceptional. Alice and I connected instantly, and now we are happily married. We appreciate the thoughtful matchmaking process!"</p>
+            </div>
+            <div class="story-card">
+                <img src="{% static 'images/image4.jpg' %}" alt="Client 3">
+                <h3>Linda & Michael</h3>
+                <p>"This platform gave me the chance to meet Michael, who has become the love of my life. The support and options provided were excellent. We couldn't be happier!"</p>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="footer-content">
+        <p>&copy; 2025 Connect. All rights reserved.</p>
+    </div>
+</footer>
+
 </body>
 </html>

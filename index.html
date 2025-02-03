@@ -26,10 +26,30 @@
     <section class="register-container">
         <div class="register-form">
             <div class="form-image">
-                <img src="{% static 'images/image10.jpg' %}" alt="Image Description">
+                <img src="{% static 'images/image6.jpg' %}" alt="Image Description">
             </div>
             <form method="post" action="{% url 'index' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                <div class="form-fields">
+                    <div class="form-row">
+                        <div class="input-container">
+                            <select name="relation" required>
+                                <option value="" disabled {% if not request.POST.relation %}selected{% endif %}>Registering for</option>
+                                <option value="myself" {% if request.POST.relation == 'myself' %}selected{% endif %}>Myself</option>
+                                <option value="my_son" {% if request.POST.relation == 'my_son' %}selected{% endif %}>My Son</option>
+                                <option value="my_daughter" {% if request.POST.relation == 'my_daughter' %}selected{% endif %}>My Daughter</option>
+                                <option value="my_relative" {% if request.POST.relation == 'my_relative' %}selected{% endif %}>My Relative</option>
+                                <option value="my_friend" {% if request.POST.relation == 'my_friend' %}selected{% endif %}>My Friend</option>
+                                <option value="my_sister" {% if request.POST.relation == 'my_sister' %}selected{% endif %}>My Sister</option>
+                                <option value="my_brother" {% if request.POST.relation == 'my_brother' %}selected{% endif %}>My Brother</option>
+                            </select>
+                            
+                            {% if form.relation.errors %}
+                                <div class="error-message">{{ form.relation.errors }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
                 <div class="form-fields">
                     <div class="form-row">
                         <div class="input-container">
@@ -108,13 +128,13 @@
                         </div>
                     </div>
                     <button type="submit">Register</button>
-                    <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+                    <p class="login-link">Already have an account? <a href="{% url 'home' %}">Login here</a></p>
                 </div>
             </form>
         </div>
     </section>
     <footer>
-        <p>&copy; 2024 MatrimonyPro. All rights reserved.</p>
+        <p>&copy; 2024 Connect. All rights reserved.</p>
     </footer>
     
     <!-- Include JavaScript file -->

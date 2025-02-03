@@ -18,8 +18,8 @@
             <a href="{% url 'index' %}" class="nav-link">
                 <i class="fas fa-home"></i> Home
             </a>
-            <a href="{% url 'profile' %}" class="nav-link">
-                <i class="fas fa-user"></i> Profile
+            <a href="{% url 'view_all_details' profile.personal_id %}" class="nav-link">
+                <i class="fas fa-user"></i> View Full Profile
             </a>
             <a href="{% url 'logout' %}" class="nav-link">
                 <i class="fas fa-sign-out-alt"></i> Logout
@@ -149,5 +149,10 @@
             </form>
         </div>
     </div>
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2024 Connect. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

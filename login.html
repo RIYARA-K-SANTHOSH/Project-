@@ -4,50 +4,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Matrimony Website</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Login - Connect</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Poppins, sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .login-form {
+            background: url('{% static "images/image6.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            padding: 30px;
+            width: 400px;
+            height: auto;
+            max-height: 500px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .connect-heading {
+            font-size: 2em;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .login-form .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .login-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-form input {
+            width: 90%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .forgot-password {
+            display: block;
+            color: #00bcd4;
+            text-decoration: none;
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .forgot-password:hover {
+            text-decoration: none;
+        }
+
+        .or-line {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .or-line span {
+            font-size: 1.2em;
+            color: white;
+        }
+
+        .login-form .btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            background-color: #00bcd4;
+            color: white;
+        }
+
+        .login-btn, .otp-btn {
+            background-color: #00bcd4;
+            color: white;
+        }
+
+        .login-btn:hover, .otp-btn:hover {
+            background-color: #019aa9;
+        }
+
+        .signup-link {
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .signup-link a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: none;
+        }
+
+        /* Hide OTP container by default */
+        .otp-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Hide Email & Password fields when OTP login is selected */
+        .hide-login-fields {
+            display: none;
+        }
+
+        /* Hide the Login and OTP buttons after switching to OTP login */
+        .hide-btns {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <section class="hero-image">
-        <header>
-            <nav>
-                <div class="logo">
-                    <h1>MatrimonyPro</h1>
-                </div>
-            </nav>
-        </header>
-        <section class="form-section">
-            <form class="form login-form" method="post" action="{% url 'login' %}">
-                {% csrf_token %}
-                <div class="form-image">
-                    <img src="{% static 'images/image10.jpg' %}" alt="Image Description">
-                </div>
-                <div class="form-content">
-                    {% if form.errors %}
-                        <div class="error-messages">
-                            {% for error in form.non_field_errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    <div class="form-row">
-                        <input type="email" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="form-row">
-                        <input type="password" name="password" placeholder="Password" required>
-                    </div>
-                    <input type="hidden" name="next" value="{{ next }}">
-                    <button type="submit">Login</button>
-                    <div class="forgot-password-link">
-                        <a href="{% url 'forgot_password' %}">Forgot Password?</a>
-                    </div>
-                </div>
-            </form>
-        </section>
-    </section>
 
-    <footer>
-        <p>&copy; 2024 MatrimonyPro. All rights reserved.</p>
-    </footer>
+    <!-- Login Page -->
+    <div class="login-page">
+        <form class="login-form" method="POST" id="login-form">
+            {% csrf_token %}
+            <!-- Heading -->
+            <h2 class="connect-heading">Connect</h2>
+
+            <!-- Email and Password fields (initially visible) -->
+            <div id="login-fields" class="form-group">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <!-- Forgot password link -->
+            <div class="form-group">
+                <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot password?</a>
+            </div>
+
+            <!-- OTP fields (hidden by default) -->
+            <div class="otp-container">
+                <div class="form-group">
+                    <label for="otp">Enter OTP</label>
+                    <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+                </div>
+                <button type="button" class="btn login-btn" id="verify-otp-btn">Verify OTP</button>
+            </div>
+
+            <!-- Login button -->
+            <button type="submit" class="btn login-btn" id="login-btn">Login</button>
+
+            
+            <!-- Sign up link -->
+            <div class="signup-link">
+                <span>New to Connect? <a href="{% url 'index' %}">Register free!</a></span>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
